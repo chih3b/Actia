@@ -1,4 +1,4 @@
-# HuBERT-based Speech Emotion Recognition (SER) System
+# HuBERT-based Speech Emotion Recognition # Tunisian Speech Emotion Recognition (SER) System
 
 This repository contains a Speech Emotion Recognition system based on the HuBERT model, with three different fine-tuning strategies: full fine-tuning, QKV fine-tuning, and classifier-only fine-tuning.
 
