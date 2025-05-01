@@ -1,0 +1,28 @@
+# Ignore model checkpoints and large files
+best.pt
+*.pt
+*.pth
+*.h5
+*.ckpt
+
+# Ignore results and screenshots
+results_hubert_standard/
+screenshots/
+
+# Ignore temporary and cache files
+__pycache__/
+temp_audio/
+*.pyc
+.DS_Store
+
+# Ignore datasets (if any)
+tounsi/
+
+# Ignore frontend and backend dependencies/builds (if needed)
+ser-web-app/frontend/ser-frontend/node_modules/
+ser-web-app/frontend/ser-frontend/dist/
+spring-backend/target/
+
+# Ignore other common files
+*.log
+*.tmp

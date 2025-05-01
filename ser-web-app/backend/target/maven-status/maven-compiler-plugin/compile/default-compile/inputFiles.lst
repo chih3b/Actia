@@ -1,0 +1,7 @@
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/model/EmotionPrediction.java
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/controller/EmotionRecognitionController.java
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/model/EmotionPredictionHistory.java
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/service/EmotionRecognitionService.java
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/repository/EmotionPredictionHistoryRepository.java
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/BackendApplication.java
+/Users/chihebnouri/SER/ser-web-app/backend/src/main/java/com/ser/backend/model/AudioRequest.java

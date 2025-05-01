@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YOLO Video Feed Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .video-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #status {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <h1>YOLO Video Feed Test</h1>
+    <p>This page tests the direct connection to the FastAPI video feed.</p>
+    
+    <div>
+        <button id="startBtn">Start Camera</button>
+        <button id="stopBtn">Stop Camera</button>
+    </div>
+    
+    <div id="status">Status: Ready</div>
+    
+    <div class="video-container">
+        <img id="videoFeed" src="" alt="No video feed" style="display: none;">
+    </div>
+    
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const status = document.getElementById('status');
+        const videoFeed = document.getElementById('videoFeed');
+        
+        let cameraId = 'test' + Math.floor(Math.random() * 1000);
+        
+        startBtn.addEventListener('click', async () => {
+            status.textContent = 'Status: Starting camera...';
+            
+            try {
+                const response = await fetch('http://localhost:8000/add_camera', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        camera_id: cameraId,
+                        source: '0',
+                        confidence: 0.5
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    status.textContent = 'Status: Camera started successfully';
+                    videoFeed.src = `http://localhost:8000${data.video_feed_url}`;
+                    videoFeed.style.display = 'block';
+                } else {
+                    status.textContent = `Status: Error - ${data.message}`;
+                }
+            } catch (error) {
+                status.textContent = `Status: Error - ${error.message}`;
+                console.error('Error:', error);
+            }
+        });
+        
+        stopBtn.addEventListener('click', async () => {
+            status.textContent = 'Status: Stopping camera...';
+            videoFeed.style.display = 'none';
+            
+            try {
+                const response = await fetch('http://localhost:8000/stop_camera', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        camera_id: cameraId
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    status.textContent = 'Status: Camera stopped successfully';
+                } else {
+                    status.textContent = 'Status: Error stopping camera';
+                }
+            } catch (error) {
+                status.textContent = `Status: Error - ${error.message}`;
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
